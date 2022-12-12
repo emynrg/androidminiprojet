@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="316dp"
+        android:layout_height="381dp"
+        android:layout_below="@+id/description"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="48dp"
+         />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="129dp"
+        android:text="Evemenemt"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+
+        android:id="@+id/description"
+        android:layout_width="293dp"
+
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="52dp"
+        android:text="aaaaaaaaaaaa"
+        android:textAlignment="center"
+        android:textColor="@color/greyyy" />
+
+
+</RelativeLayout>

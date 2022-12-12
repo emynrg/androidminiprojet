@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_car"
+        android:label="fragment_car"
+        android:name="tn.esprit.miniprojet.Views.fragument.Car"
+        tools:layout="@layout/fragment_car" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:label="fragment_profile"
+
+        android:name="tn.esprit.miniprojet.Views.fragument.Profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:label="fragment_home"
+
+        android:name="tn.esprit.miniprojet.Views.fragument.HomeF"
+
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:label="fragment_settings"
+
+        android:name="tn.esprit.miniprojet.Views.fragument.Settings"
+
+        tools:layout="@layout/fragment_settings" />
+    <activity
+        android:id="@+id/navigation_ADD"
+        android:label="aajout"
+
+        android:name="tn.esprit.miniprojet."
+
+        tools:layout="@layout/fragment_settings"
+        />
+</navigation>

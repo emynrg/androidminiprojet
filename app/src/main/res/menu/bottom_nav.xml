@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/home"
+
+        android:id="@+id/navigation_home"
+        android:enabled="true"
+
+        android:icon="@drawable/home"/>
+
+
+    <item android:title="@string/cars"
+        android:id="@+id/navigation_car"
+        android:enabled="true"
+        android:icon="@drawable/car"/>
+    <item android:title="ADD"
+        android:id="@+id/navigation_ADD"
+        android:enabled="true"
+        />
+
+
+
+
+
+
+
+    <item android:title="@string/profile"
+        android:id="@+id/navigation_profile"
+        android:enabled="true"
+
+        android:icon="@drawable/profile"/>
+
+    <item android:title="@string/settings"
+        android:id="@+id/navigation_settings"
+        android:enabled="true"
+
+        android:icon="@drawable/setting"/>
+
+
+
+</menu>
