@@ -16,6 +16,8 @@ import tn.esprit.miniprojet.Services.CarService
 class CarViewModel : ViewModel() {
     var CarLiveData: MutableLiveData<Car> = MutableLiveData()
     val _CarLiveData : LiveData<Car> = CarLiveData
+    var CarLiveData1: MutableLiveData<MutableList<Car>> = MutableLiveData()
+    val _CarLiveData1 : LiveData<MutableList<Car>> = CarLiveData1
 
 
     fun AddCar(marque: RequestBody, model: RequestBody, description: RequestBody, image: MultipartBody.Part){
@@ -40,5 +42,33 @@ class CarViewModel : ViewModel() {
 
         })
     }
+
+
+    fun getCar() {
+        val retrofit = ApiClient.getApiClient()!!.create(CarService::class.java)
+        val getCar = retrofit.getcar()
+        getCar.enqueue(object : Callback<MutableList<Car>> {
+            override fun onResponse(call: Call<MutableList<Car>>, response: Response<MutableList<Car>>) {
+                if (response.isSuccessful) {
+                    CarLiveData1.postValue(response.body())
+                } else {
+                    Log.i("errorBody", response.errorBody()!!.string())
+
+                    CarLiveData1.postValue(response.body())
+                }
+
+            }
+
+            override fun onFailure(call: Call<MutableList<Car>>, t: Throwable) {
+                CarLiveData1.postValue(null)
+                Log.i("failure", t.message.toString())
+            }
+
+        })
+
+    }
+
+
+
 
 }

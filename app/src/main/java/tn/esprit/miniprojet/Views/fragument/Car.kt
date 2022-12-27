@@ -9,21 +9,28 @@ import android.view.animation.LinearInterpolator
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.models.SlideModel
 import com.yuyakaido.android.cardstackview.*
 import tn.esprit.miniprojet.Models.ItemModel
 import tn.esprit.miniprojet.R
+import tn.esprit.miniprojet.ViewModel.CarViewModel
 import tn.esprit.miniprojet.ViewModel.CardStackCallback
-
+import tn.esprit.miniprojet.Views.LoginActivity
 
 
 class Car : Fragment() {
+    lateinit var viewModel: CarViewModel
+    var items = mutableListOf<tn.esprit.miniprojet.Models.Car>()
     private var manager: CardStackLayoutManager? = null
     private var adapter: CardStackAdapter? = null
-    private lateinit var imageSlider : ImageSlider
+    private lateinit var imageSlider: ImageSlider
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
@@ -35,6 +42,7 @@ class Car : Fragment() {
 
     private fun init(root: View) {
         val cardStackView = root.findViewById<CardStackView>(R.id.card_stack_view)
+        viewModel = ViewModelProvider(this).get(CarViewModel::class.java)
 
         val imageSlider = root.findViewById<ImageSlider>(R.id.item_image)
 
@@ -92,50 +100,44 @@ class Car : Fragment() {
         manager!!.setCanScrollHorizontal(true)
         manager!!.setSwipeableMethod(SwipeableMethod.Manual)
         manager!!.setOverlayInterpolator(LinearInterpolator())
-        adapter = CardStackAdapter(addList())
+        adapter = CardStackAdapter()
         cardStackView.layoutManager = manager
         cardStackView.adapter = adapter
         cardStackView.itemAnimator = DefaultItemAnimator()
-
-
+        addList()
+        //(context as LoginActivity).startActivity()
 
     }
 
     private fun paginate() {
-        val old: List<ItemModel> = adapter!!.getItems()
-        val baru: List<ItemModel?> =  ArrayList<ItemModel?>(addList())    //ArrayList<Any?>(addList())
-        val callback = CardStackCallback(old, baru as List<ItemModel>)
-        val hasil = DiffUtil.calculateDiff(callback)
-        adapter?.setItems(baru)
-        hasil.dispatchUpdatesTo(adapter!!)
+        /*   val old: List<tn.esprit.miniprojet.Models.Car> = adapter!!.getItems()
+           val baru: List<tn.esprit.miniprojet.Models.Car?> =  ArrayList<tn.esprit.miniprojet.Models.Car?>(addList())    //ArrayList<Any?>(addList())
+           val callback = CardStackCallback(old, baru as List<tn.esprit.miniprojet.Models.Car>)
+           val hasil = DiffUtil.calculateDiff(callback)
+           adapter?.setItems(baru)
+           hasil.dispatchUpdatesTo(adapter!!)*/
     }
 
 
+    private fun addList() {
+
+        viewModel.getCar()
+
+        viewModel._CarLiveData1.observe(
+            viewLifecycleOwner,
+            Observer<MutableList<tn.esprit.miniprojet.Models.Car>> {
+
+                if (it.size > 0) {
+
+                    items = it
+                    adapter!!.setItems(it)
+                    adapter!!.notifyItemInserted(0)
 
 
+                }
+            })
 
 
-    private fun addList(): List<ItemModel> {
-
-
-
-
-        val items: MutableList<ItemModel> = ArrayList<ItemModel>()
-        items.add(ItemModel(R.drawable.splash,"aaa","25","aaaaaa"))
-        items.add(ItemModel(R.drawable.splash, "Marpuah", "20", "Malang"))
-        items.add(ItemModel(R.drawable.splash, "Sukijah", "27", "Jonggol"))
-        items.add(ItemModel(R.drawable.splash, "Markobar", "19", "Bandung"))
-        items.add(ItemModel(R.drawable.splash, "Marmut", "25", "Hutan"))
-        items.add(ItemModel(R.drawable.sample1, "Markonah", "24", "Jember"))
-        items.add(ItemModel(R.drawable.sample2, "Marpuah", "20", "Malang"))
-        items.add(ItemModel(R.drawable.sample3, "Sukijah", "27", "Jonggol"))
-        items.add(ItemModel(R.drawable.sample4, "Markobar", "19", "Bandung"))
-        items.add(ItemModel(R.drawable.sample5, "Marmut", "25", "Hutan"))
-
-
-
-
-        return items
     }
 
     companion object {

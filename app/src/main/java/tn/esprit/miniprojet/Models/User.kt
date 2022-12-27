@@ -1,5 +1,7 @@
 package tn.esprit.miniprojet.Models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
 
@@ -28,5 +30,10 @@ data class ResponseUser (
 
 
 
+
+
+
+
 data class loginResponse (var message: String? = null,
-                          var user:ResponseUser?=null)
+                          var user:ResponseUser?=null,
+                          var accessToken : String)

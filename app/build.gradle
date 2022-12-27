@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -62,6 +63,8 @@ dependencies {
     implementation 'com.karumi:dexter:6.2.2'
     //coil
     implementation("io.coil-kt:coil:1.1.1")
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 
 
 }

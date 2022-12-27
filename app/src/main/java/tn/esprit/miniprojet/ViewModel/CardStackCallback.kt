@@ -1,12 +1,13 @@
 package tn.esprit.miniprojet.ViewModel
 
 import androidx.recyclerview.widget.DiffUtil
+import tn.esprit.miniprojet.Models.Car
 import tn.esprit.miniprojet.Models.ItemModel
 
-class CardStackCallback(old: List<ItemModel>, baru: List<ItemModel>) :
+class CardStackCallback(old: List<Car>, baru: List<Car>) :
     DiffUtil.Callback() {
-    private val old: List<ItemModel>
-    private val baru: List<ItemModel>
+    private val old: List<Car>
+    private val baru: List<Car>
     override fun getOldListSize(): Int {
         return old.size
     }
@@ -16,7 +17,7 @@ class CardStackCallback(old: List<ItemModel>, baru: List<ItemModel>) :
     }
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return old[oldItemPosition].getImage() === baru[newItemPosition].getImage()
+        return old[oldItemPosition].image === baru[newItemPosition].image
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {

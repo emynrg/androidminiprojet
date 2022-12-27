@@ -1,6 +1,7 @@
 package tn.esprit.miniprojet.Views
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -12,6 +13,25 @@ import tn.esprit.miniprojet.Models.loginResponse
 import tn.esprit.miniprojet.R
 import tn.esprit.miniprojet.ViewModel.LoginViewModel
 
+
+
+
+const val ID="id"
+const val USERNAME="username"
+const val EMAIL="email"
+const val PASSWORD="password"
+const val TOKEN="token"
+const val DATEDENAISSANCE="datedenaissance"
+const val NUMERO="numero"
+const val ROLE="role"
+const val USER="user"
+const val PREF_LOGIN="Remember me"
+
+
+
+
+
+
 class LoginActivity : AppCompatActivity() {
 
 
@@ -20,6 +40,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var loginbtn : Button
     lateinit var loginViewModel : LoginViewModel
     lateinit var signUp : Button
+    lateinit var prefs : SharedPreferences
 
 
 
@@ -27,6 +48,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+
+        prefs = getSharedPreferences(PREF_LOGIN, MODE_PRIVATE)
 
         usernameLogin = findViewById(R.id.username)
         passwordLogin = findViewById(R.id.password)
@@ -39,6 +62,13 @@ signUp.setOnClickListener(){
     startActivity(Intent(this,signupActivity::class.java) )
 }
 
+
+
+
+        if (prefs.getString(USERNAME,"")!!.isNotEmpty() and prefs.getString(PASSWORD,"")!!.isNotEmpty()){
+            val intent = Intent(applicationContext,Home::class.java)
+            startActivity(intent)
+        }
 
         loginbtn.setOnClickListener{
             if (validationUsername()&&validationPassword()){
@@ -86,6 +116,25 @@ signUp.setOnClickListener(){
             loginViewModel.login(usernameLogin.text.toString().trim(),passwordLogin.text.toString().trim())
             loginViewModel._loginLiveData.observe(this, Observer<loginResponse>{
             if (it!=null){
+
+                prefs.edit().apply(){
+
+
+                    putString(ID,it.user?._id)
+                    putString(USERNAME,it.user?.username)
+                    putString(EMAIL,it.user?.email)
+                    putString(PASSWORD,it.user?.password)
+                    putString(NUMERO,it.user?.numero.toString())
+                    putString(DATEDENAISSANCE,it.user?.datedenaissance)
+                    putString(TOKEN,it.accessToken)
+                    putString(ROLE,it.user?.role)
+                    apply()
+
+
+
+
+                }
+
                 Toast.makeText(applicationContext, "Login succes !", Toast.LENGTH_LONG).show()
 
                 startActivity(Intent(this,Home::class.java) )

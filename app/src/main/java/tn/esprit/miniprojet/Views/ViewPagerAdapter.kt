@@ -1,5 +1,6 @@
 package tn.esprit.miniprojet.Views
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,8 @@ class ViewPagerAdapter ( private val title: List<String>,private val description
         holder.itemDescription.text = description[position]
 
         holder.itemImage.setImageResource(image[position])
+
+
 
     }
 
