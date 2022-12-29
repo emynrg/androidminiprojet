@@ -3,14 +3,17 @@ package tn.esprit.miniprojet.Views
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
+import tn.esprit.miniprojet.Models.User
 import tn.esprit.miniprojet.R
 import tn.esprit.miniprojet.ViewModel.ModifyUserViewModel
 
@@ -26,11 +29,6 @@ class modifyprofile : AppCompatActivity() {
     lateinit var viewmodel : ModifyUserViewModel
 
 
-
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_modifyprofile)
@@ -43,20 +41,11 @@ class modifyprofile : AppCompatActivity() {
         prefs = getSharedPreferences(PREF_LOGIN, MODE_PRIVATE)
         done = findViewById(R.id.confirmermodification)
 
-        val username = prefs.getString(USERNAME,"")
-        usernamemodif.setText(username)
-
-        val email = prefs.getString(EMAIL,"")
-        emailmodif.setText(email)
-
-        val number = prefs.getString(NUMERO,"")
-        numbermodif.setText(number)
-
-        val date = prefs.getString(DATEDENAISSANCE,"")
-        datedenaissancemodif.setText(date)
 
 
         var id = prefs.getString(ID,"")
+        getUserId2(id!!)
+
 
         done.setOnClickListener {
 
@@ -73,23 +62,38 @@ class modifyprofile : AppCompatActivity() {
     }
 
 
+    private fun getUserId2(id:String){
+
+
+        viewmodel.getUserbyID2(id)
+        viewmodel._UserLiveData.observe(this, Observer<User> {
+            if(it!=null){
+
+                usernamemodif.setText(it.username)
+                emailmodif.setText(it.email)
+                numbermodif.setText(it.numero)
+                datedenaissancemodif.setText(it.datedenaissance)
+
+            }else{
+
+            }
+        })
+
+    }
+
 
     private fun ModifyProfile(id: String) {
 
-        val username= usernamemodif.text.toString().trim().toRequestBody("text/plain".toMediaTypeOrNull())
-        val email= emailmodif.text.toString().trim().toRequestBody("text/plain".toMediaTypeOrNull())
-        val date = datedenaissancemodif.text.toString().trim().toRequestBody("text/plain".toMediaTypeOrNull())
-        val numero = numbermodif.text.toString().trim().toRequestBody("text/plain".toMediaTypeOrNull())
-        viewmodel.ModifyUser(id,username,email, date , numero)
-        viewmodel._ModifyLiveData.observe(this, androidx.lifecycle.Observer{
-            if (it!=null){
-                finish()
-                //   Toast.makeText(applicationContext,  file.name, Toast.LENGTH_LONG).show()
 
-            }else{
-                // Toast.makeText(applicationContext,  file.name, Toast.LENGTH_LONG).show()
-            }
-        })
+        val username= usernamemodif.text.toString().trim()
+        val email= emailmodif.text.toString().trim()
+        val date = datedenaissancemodif.text.toString().trim()
+        val numero = numbermodif.text.toString().trim()
+        val user = User(id,username,email,"",date,numero,"",0)
+        Log.i("username",username.toString())
+        viewmodel.ModifyUser(id,user)
+        Toast.makeText(applicationContext,"Update!!",Toast.LENGTH_SHORT).show()
+        finish()
     }
 
 

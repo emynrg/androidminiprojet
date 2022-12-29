@@ -1,5 +1,6 @@
 package tn.esprit.miniprojet.ViewModel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -20,9 +21,9 @@ class CarViewModel : ViewModel() {
     val _CarLiveData1 : LiveData<MutableList<Car>> = CarLiveData1
 
 
-    fun AddCar(marque: RequestBody, model: RequestBody, description: RequestBody, image: MultipartBody.Part){
-        val retrofit= ApiClient.getApiClient()!!.create(CarService::class.java)
-        val addCar=retrofit.AddCar(marque,model,description,image)
+    fun AddCar(marque: RequestBody, model: RequestBody, description: RequestBody, image: MultipartBody.Part , idUser:String,context : Context){
+        val retrofit= ApiClient.getApiClientWithToken(context)!!.create(CarService::class.java)
+        val addCar=retrofit.AddCar(marque,model,description,image ,idUser)
         addCar.enqueue(object : Callback<Car> {
             override fun onResponse(call: Call<Car>, response: Response<Car>) {
                 if (response.isSuccessful){

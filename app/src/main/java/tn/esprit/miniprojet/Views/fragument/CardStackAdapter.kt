@@ -1,5 +1,7 @@
 package tn.esprit.miniprojet.Views.fragument
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +12,9 @@ import com.squareup.picasso.Picasso
 import tn.esprit.miniprojet.Models.Car
 import tn.esprit.miniprojet.Models.ItemModel
 import tn.esprit.miniprojet.R
+import tn.esprit.miniprojet.Views.joindreEvent
 
-class CardStackAdapter() :
-    RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
+class CardStackAdapter(val context: Context) : RecyclerView.Adapter<CardStackAdapter.ViewHolder>() {
        private var items = mutableListOf<Car>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -28,6 +30,9 @@ class CardStackAdapter() :
         holder.kota.setText(car.description)
         Picasso.get().load(car.image).into(holder.image)
 
+
+
+
     }
 
     override fun getItemCount(): Int {
@@ -39,6 +44,7 @@ class CardStackAdapter() :
         var nama: TextView //marque
         var usia: TextView // model
         var kota: TextView //description
+
         /* fun setData(data: ItemModel) {
              Picasso.get()
                  .load(data.getImage())

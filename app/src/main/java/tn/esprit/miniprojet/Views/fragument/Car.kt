@@ -1,5 +1,6 @@
 package tn.esprit.miniprojet.Views.fragument
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,11 +19,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.ImageSlider
 import com.denzcoskun.imageslider.models.SlideModel
 import com.yuyakaido.android.cardstackview.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import tn.esprit.miniprojet.Models.Contact
 import tn.esprit.miniprojet.Models.ItemModel
 import tn.esprit.miniprojet.R
 import tn.esprit.miniprojet.ViewModel.CarViewModel
 import tn.esprit.miniprojet.ViewModel.CardStackCallback
+import tn.esprit.miniprojet.ViewModel.ContactViewModel
 import tn.esprit.miniprojet.Views.LoginActivity
+import java.io.File
+import java.io.FileOutputStream
 
 
 class Car : Fragment() {
@@ -31,18 +40,34 @@ class Car : Fragment() {
     private var manager: CardStackLayoutManager? = null
     private var adapter: CardStackAdapter? = null
     private lateinit var imageSlider: ImageSlider
+    lateinit var viewModelContact: ContactViewModel
+
+
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        val root: View = inflater.inflate(R.layout.fragment_car, container, false)
+        val root = inflater.inflate(R.layout.fragment_car, container, false)
+
+
         init(root)
         return root
     }
 
     private fun init(root: View) {
         val cardStackView = root.findViewById<CardStackView>(R.id.card_stack_view)
+
         viewModel = ViewModelProvider(this).get(CarViewModel::class.java)
+        viewModelContact = ViewModelProvider(this).get(ContactViewModel::class.java)
+
+
+
+
+
 
         val imageSlider = root.findViewById<ImageSlider>(R.id.item_image)
 
@@ -52,8 +77,37 @@ class Car : Fragment() {
             }
 
             override fun onCardSwiped(direction: Direction) {
+
+
+
                 Log.d(TAG, "onCardSwiped: p=" + manager!!.topPosition + " d=" + direction)
                 if (direction == Direction.Right) {
+
+                    viewModel._CarLiveData1.observe (
+                        viewLifecycleOwner,
+                        Observer<MutableList<tn.esprit.miniprojet.Models.Car>>  {
+
+                            if (it.size > 0) {
+
+
+
+
+
+
+
+                                for(i in it ){
+                                   var iduser2 =  i.user.toString()
+
+                                    Log.i("id l karhba ",iduser2)
+                                    if(iduser2.equals("63add2a41967477f6813648f"))
+                                    addContact(iduser2)
+                                }
+
+                            }
+                        })
+
+
+
                     Toast.makeText(context, "Direction Right", Toast.LENGTH_SHORT).show()
                 }
                 if (direction == Direction.Top) {
@@ -100,7 +154,7 @@ class Car : Fragment() {
         manager!!.setCanScrollHorizontal(true)
         manager!!.setSwipeableMethod(SwipeableMethod.Manual)
         manager!!.setOverlayInterpolator(LinearInterpolator())
-        adapter = CardStackAdapter()
+        adapter = CardStackAdapter(requireContext())
         cardStackView.layoutManager = manager
         cardStackView.adapter = adapter
         cardStackView.itemAnimator = DefaultItemAnimator()
@@ -118,7 +172,6 @@ class Car : Fragment() {
            hasil.dispatchUpdatesTo(adapter!!)*/
     }
 
-
     private fun addList() {
 
         viewModel.getCar()
@@ -128,7 +181,9 @@ class Car : Fragment() {
             Observer<MutableList<tn.esprit.miniprojet.Models.Car>> {
 
                 if (it.size > 0) {
-
+                    for(i in it ){
+                        i.user
+                    }
                     items = it
                     adapter!!.setItems(it)
                     adapter!!.notifyItemInserted(0)
@@ -139,8 +194,28 @@ class Car : Fragment() {
 
 
     }
+    private fun addContact(iduser2 : String){
+
+        viewModelContact= ViewModelProvider(this).get(ContactViewModel::class.java)
+        viewModelContact.AddContact(iduser2,requireContext())
+        viewModelContact._ContactLiveData .observe(this, Observer<Contact>{
+            if (it!=null){
+                Toast.makeText(requireContext(),  "like sended", Toast.LENGTH_LONG).show()
+
+            }else{
+                Toast.makeText(requireContext(),  "", Toast.LENGTH_LONG).show()
+            }
+        })
+
+
+
+    }
 
     companion object {
         private val TAG = Car::class.java.simpleName
     }
+
+
+
+
 }

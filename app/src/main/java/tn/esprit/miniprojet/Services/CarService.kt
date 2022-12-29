@@ -14,6 +14,7 @@ interface CarService {
                @Part("model") model: RequestBody,
                @Part("description") description: RequestBody,
                @Part image: MultipartBody.Part,
+               @Part("user") idUser : String,
     ):Call<Car>
 
 

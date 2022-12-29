@@ -7,6 +7,7 @@ data class Car (
     var model:String?=null,
     var description :String?=null,
     var image:String?=null,
+    var user : String?=null,
     var __v:Int=0
 )
 

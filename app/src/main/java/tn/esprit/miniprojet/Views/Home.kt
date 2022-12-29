@@ -8,6 +8,7 @@ import android.app.Dialog
 import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -16,6 +17,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +25,7 @@ import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
@@ -82,6 +85,9 @@ class Home : AppCompatActivity() {
     lateinit var descriptionET : EditText
      private lateinit var carViewModel : CarViewModel
 
+    lateinit var prefs : SharedPreferences
+
+
 
 
 
@@ -104,14 +110,6 @@ class Home : AppCompatActivity() {
 
 
             showDialog()
-
-
-
-
-
-
-
-
 
         }
 
@@ -168,50 +166,6 @@ class Home : AppCompatActivity() {
         dialog.window!!.attributes.windowAnimations = R.style.DialogAnimation
         dialog.window!!.setGravity(Gravity.FILL_VERTICAL)
 
-/*
-
-        option.adapter =ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,options)
-
-
-
-        option.onItemSelectedListener = object  : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                Toast.makeText(applicationContext, "${options.get(position)}", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                Toast.makeText(applicationContext, "please Select an Option", Toast.LENGTH_SHORT).show()
-            }
-
-
-        }
-*/
-        /*
-/***************** bazdeh **********/
-        //when you click on the image
-        carimage.setOnClickListener {
-            val pictureDialog = AlertDialog.Builder(this)
-            pictureDialog.setTitle("Select Action")
-            val pictureDialogItem = arrayOf("Select photo from Gallery",
-                "Capture photo from Camera")
-            pictureDialog.setItems(pictureDialogItem) { dialog, which ->
-
-                when (which) {
-                    0 -> gallery()
-                    1 -> camera()
-                }
-            }
-
-            pictureDialog.show()
-        }
-/******************************************/
-*/
-
         carimage.setOnClickListener {
             if (ContextCompat.checkSelfPermission(applicationContext,
                     Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -225,7 +179,7 @@ class Home : AppCompatActivity() {
 
 
         saveCar.setOnClickListener{
-            AddCar()
+            AddCar(applicationContext.getSharedPreferences(PREF_LOGIN,AppCompatActivity.MODE_PRIVATE).getString(ID,"")!!)
 
 
         }
@@ -303,149 +257,7 @@ class Home : AppCompatActivity() {
         }
     }
 
-
-
- /*
-    /***************** bazdeh *****************/
-
-
-    private fun galleryCheckPermission() {
-
-        Dexter.withContext(this).withPermission(
-            android.Manifest.permission.READ_EXTERNAL_STORAGE
-        ).withListener(object : PermissionListener {
-            override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
-                gallery()
-            }
-
-            override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
-                Toast.makeText(
-                    this@Home,
-                    "You have denied the storage permission to select image",
-                    Toast.LENGTH_SHORT
-                ).show()
-                showRotationalDialogForPermission()
-            }
-
-            override fun onPermissionRationaleShouldBeShown(
-                p0: PermissionRequest?, p1: PermissionToken?) {
-                showRotationalDialogForPermission()
-            }
-        }).onSameThread().check()
-    }
-
-    private fun gallery() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, GALLERY_REQUEST_CODE)
-    }
-
-
-    private fun cameraCheckPermission() {
-
-        Dexter.withContext(this)
-            .withPermissions(
-                android.Manifest.permission.READ_EXTERNAL_STORAGE,
-                android.Manifest.permission.CAMERA).withListener(
-
-                object : MultiplePermissionsListener {
-                    override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-                        report?.let {
-
-                            if (report.areAllPermissionsGranted()) {
-                                camera()
-                            }
-
-                        }
-                    }
-
-                    override fun onPermissionRationaleShouldBeShown(
-                        p0: MutableList<PermissionRequest>?,
-                        p1: PermissionToken?) {
-                        showRotationalDialogForPermission()
-                    }
-
-                }
-            ).onSameThread().check()
-    }
-
-
-    private fun camera() {
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intent, CAMERA_REQUEST_CODE)
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode == Activity.RESULT_OK) {
-
-            when (requestCode) {
-
-                CAMERA_REQUEST_CODE -> {
-
-                     bitmap = data?.extras?.get("data") as Bitmap
-
-                    //we are using coroutine image loader (coil)
-                    carimage.load(bitmap) {
-                        crossfade(true)
-                        crossfade(1000)
-                        transformations(CircleCropTransformation())
-                    }
-                }
-
-                GALLERY_REQUEST_CODE -> {
-
-                    carimage.load(data?.data) {
-                        crossfade(true)
-                        crossfade(1000)
-                        transformations(CircleCropTransformation())
-                    }
-
-                }
-            }
-
-        }
-
-    }
-
-
-    private fun showRotationalDialogForPermission()  {
-        AlertDialog.Builder(this)
-            .setMessage("It looks like you have turned off permissions"
-                    + "required for this feature. It can be enable under App settings!!!")
-
-            .setPositiveButton("Go TO SETTINGS") { _, _ ->
-
-                try {
-                    val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                    val uri = Uri.fromParts("package", packageName, null)
-                    intent.data = uri
-                    startActivity(intent)
-
-                } catch (e: ActivityNotFoundException) {
-                    e.printStackTrace()
-                }
-            }
-
-            .setNegativeButton("CANCEL") { dialog, _ ->
-                dialog.dismiss()
-            }.show()
-
-
-    }
-
-
-
-
-
-    /*******************************************/
-
-
-  */
-  */
-    fun AddCar(){
+    fun AddCar(idUser :String){
 
         val fileDir=applicationContext.filesDir
         val file= File(fileDir,"image.jpg")
@@ -456,15 +268,14 @@ class Home : AppCompatActivity() {
          val image = MultipartBody.Part.createFormData("image", file.name,requestBody)
 
 
-        // val file: File = File(imgUri.path!!)
-        // val requestFile =RequestBody.create("multipart/form-data".toMediaTypeOrNull(),file)
-        // val body = MultipartBody.Part.createFormData("image", file.name, requestFile)
-        //val option= option.ge.toString().trim().toRequestBody("text/plain".toMediaTypeOrNull())
+
         val model=modelET.text.toString().trim().toRequestBody("text/plain".toMediaTypeOrNull())
+        Log.i("model mtaaa l car ", model.toString())
+
         val marque=marque.text.toString().trim().toRequestBody("text/plain".toMediaTypeOrNull())
         val desription=descriptionET.text.toString().trim().toRequestBody("text/plain".toMediaTypeOrNull())
         carViewModel= ViewModelProvider(this).get(CarViewModel::class.java)
-        carViewModel.AddCar(marque,model,desription,image)
+        carViewModel.AddCar(marque,model,desription,image,idUser,this)
         carViewModel._CarLiveData .observe(this, Observer<Car>{
             if (it!=null){
                 Toast.makeText(applicationContext,  file.name, Toast.LENGTH_LONG).show()

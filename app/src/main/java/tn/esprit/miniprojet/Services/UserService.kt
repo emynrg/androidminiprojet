@@ -32,15 +32,18 @@ interface UserService {
         @Path ("id") id :String
     ):Call<ResponseUser>
 
-@Multipart
+
+
+    @GET("user/affichage/{idUser}")
+    fun getuserbyID2(
+        @Path ("idUser") idUser :String
+    ):Call<User>
+
 @PUT("user/{idUser}")
 fun UpdateProfile(
     @Path("idUser") idUser: String,
-    @Part("username") username:RequestBody,
-    @Part("email") email:RequestBody,
-    @Part("datedenaissance") datedenaissance:RequestBody,
-    @Part("numero") numero:RequestBody,
-):Call<String>
+    @Body user:User
+):Call<User>
 
 
 
