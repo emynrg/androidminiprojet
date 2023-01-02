@@ -5,7 +5,7 @@ data class Post (
     var titre:String?=null,
     var description :String?=null,
     var imagePost:String?=null,
-    var user:String?=null,
+    var user:Userforpost,
     var __v:Int=0
 
 )

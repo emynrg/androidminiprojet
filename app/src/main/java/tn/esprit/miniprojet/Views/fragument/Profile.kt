@@ -32,6 +32,9 @@ class Profile : Fragment() {
     lateinit var recyclerView : RecyclerView;
 
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {

@@ -11,11 +11,14 @@
         <entry key="..\:/android/miniprojet/app/src/main/res/drawable-v24/overlay_black.xml" value="0.312" />
         <entry key="..\:/android/miniprojet/app/src/main/res/drawable/add.xml" value="0.2775" />
         <entry key="..\:/android/miniprojet/app/src/main/res/drawable/addcarbackgroud.xml" value="0.3485" />
+        <entry key="..\:/android/miniprojet/app/src/main/res/drawable/addpost.xml" value="0.27" />
         <entry key="..\:/android/miniprojet/app/src/main/res/drawable/car.xml" value="0.312" />
+        <entry key="..\:/android/miniprojet/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.27" />
         <entry key="..\:/android/miniprojet/app/src/main/res/drawable/profile.xml" value="0.312" />
         <entry key="..\:/android/miniprojet/app/src/main/res/drawable/shadow.xml" value="0.1925" />
         <entry key="..\:/android/miniprojet/app/src/main/res/drawable/shadow1.xml" value="0.3625" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/acceuil.xml" value="0.2965811965811966" />
+        <entry key="..\:/android/miniprojet/app/src/main/res/layout/activity_addpost.xml" value="0.35833333333333334" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/activity_home.xml" value="0.3395638629283489" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/activity_joindre_event.xml" value="0.3625" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/activity_login.xml" value="0.33" />
@@ -23,15 +26,16 @@
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/activity_modifyprofile.xml" value="0.33" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/activity_signup.xml" value="0.22" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/activity_welcome_page.xml" value="0.3625" />
-        <entry key="..\:/android/miniprojet/app/src/main/res/layout/addcar.xml" value="0.25" />
+        <entry key="..\:/android/miniprojet/app/src/main/res/layout/addcar.xml" value="0.18" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/event.xml" value="0.25" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/fragment_car.xml" value="0.3625" />
-        <entry key="..\:/android/miniprojet/app/src/main/res/layout/fragment_home.xml" value="0.3625" />
+        <entry key="..\:/android/miniprojet/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/fragment_profile.xml" value="0.3625" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/fragment_settings.xml" value="0.33" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/item_card.xml" value="0.3614583333333333" />
+        <entry key="..\:/android/miniprojet/app/src/main/res/layout/item_event.xml" value="0.3625" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/item_page.xml" value="0.3614583333333333" />
-        <entry key="..\:/android/miniprojet/app/src/main/res/layout/item_post.xml" value="0.3614583333333333" />
+        <entry key="..\:/android/miniprojet/app/src/main/res/layout/item_post.xml" value="0.33" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/post.xml" value="0.3614583333333333" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/test.xml" value="0.3605072463768116" />
         <entry key="..\:/android/miniprojet/app/src/main/res/menu/bottom_nav.xml" value="0.3625" />

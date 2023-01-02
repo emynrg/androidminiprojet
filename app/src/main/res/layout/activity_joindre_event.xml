@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageViewEventdetails"
         android:layout_width="383dp"
         android:layout_height="266dp"
         android:src="@drawable/event1"
@@ -50,8 +50,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintStart_toStartOf="@+id/imageViewEventdetails"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewEventdetails" />
 
     <TextView
         android:id="@+id/descriptiondetailsTF"

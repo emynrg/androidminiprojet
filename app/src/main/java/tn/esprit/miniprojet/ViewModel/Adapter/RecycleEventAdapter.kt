@@ -43,13 +43,16 @@ class RecycleEventAdapter (val context: Context) :  RecyclerView.Adapter<Recycle
         var x = eventDescriptiondetails[position]
 
 
+
         holder.itemView.setOnClickListener {
             val intent= Intent(context, joindreEvent::class.java)
             var name = holder.Eventname.text.toString()
             var desc = x
+            val desc2 = holder.eventDescription.text.toString()
 
             intent.putExtra("description",desc)
             intent.putExtra("name",name)
+            intent.putExtra("descriptionaffichageprofile",desc2)
 
             context.startActivity(intent)
         }

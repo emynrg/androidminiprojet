@@ -27,8 +27,8 @@ class OAuthInterceptor(context: Context): Interceptor {
 class ApiClient {
 
 companion object{
-   // val URL ="http://10.0.2.2:9091/"
-    val URL ="http://192.168.43.93:9091/"
+    //val URL ="http://10.0.2.2:9091/"
+    val URL ="http://172.20.10.4:9091/"
     var retrofit: Retrofit? = null
 
     var retrofitToken: Retrofit? = null

@@ -7,6 +7,7 @@ class ItemModel {
      private  var kota:String? = null
 
 
+
     constructor (image: Int, nama: String?, usia: String, kota: String) {
         this.image = image
         this.nama = nama
@@ -33,4 +34,5 @@ class ItemModel {
     fun getKota(): String? {
         return kota
     }
+
 }

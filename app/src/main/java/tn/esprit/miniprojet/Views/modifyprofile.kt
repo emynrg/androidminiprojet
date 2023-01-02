@@ -1,5 +1,7 @@
 package tn.esprit.miniprojet.Views
 
+import android.app.Activity
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +18,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import tn.esprit.miniprojet.Models.User
 import tn.esprit.miniprojet.R
 import tn.esprit.miniprojet.ViewModel.ModifyUserViewModel
+import tn.esprit.miniprojet.Views.fragument.Settings
 
 class modifyprofile : AppCompatActivity() {
 
@@ -24,7 +27,7 @@ class modifyprofile : AppCompatActivity() {
     lateinit var numbermodif : EditText
     lateinit var datedenaissancemodif : EditText
     lateinit var prefs : SharedPreferences
-    lateinit var done : Button
+    lateinit var done : TextView
     lateinit var cancel : TextView
     lateinit var viewmodel : ModifyUserViewModel
 
@@ -40,8 +43,7 @@ class modifyprofile : AppCompatActivity() {
         datedenaissancemodif = findViewById(R.id.modifierdatedenaissanceET)
         prefs = getSharedPreferences(PREF_LOGIN, MODE_PRIVATE)
         done = findViewById(R.id.confirmermodification)
-
-
+        cancel = findViewById(R.id.cancelaaa)
 
         var id = prefs.getString(ID,"")
         getUserId2(id!!)
@@ -53,6 +55,15 @@ class modifyprofile : AppCompatActivity() {
 
 
         }
+        cancel.setOnClickListener {
+
+
+
+            finish()
+
+
+        }
+
 
 
 

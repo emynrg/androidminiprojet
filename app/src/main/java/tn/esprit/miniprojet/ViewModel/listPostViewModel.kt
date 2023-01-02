@@ -19,6 +19,9 @@ class listPostViewModel : ViewModel() {
 
 
 
+
+
+
     fun getAllPosts() {
         val retrofit = ApiClient.getApiClient()!!.create(PostService::class.java)
         val getPost = retrofit.getAll()

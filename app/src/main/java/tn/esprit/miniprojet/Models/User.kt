@@ -31,6 +31,10 @@ data class ResponseUser (
 
 
 
+data class Userforpost(
+    var _id:String?=null,
+    var username: String? = null,
+)
 
 
 

@@ -38,6 +38,12 @@ interface UserService {
     fun getuserbyID2(
         @Path ("idUser") idUser :String
     ):Call<User>
+    @GET("user/affichage/{idUser}")
+
+
+    fun getuserbyID3(
+        @Path ("idUser") idUser :String
+    ):Call<String>
 
 @PUT("user/{idUser}")
 fun UpdateProfile(

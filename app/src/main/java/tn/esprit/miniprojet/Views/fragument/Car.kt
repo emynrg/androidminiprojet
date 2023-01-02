@@ -43,10 +43,6 @@ class Car : Fragment() {
     lateinit var viewModelContact: ContactViewModel
 
 
-
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
@@ -65,10 +61,6 @@ class Car : Fragment() {
         viewModelContact = ViewModelProvider(this).get(ContactViewModel::class.java)
 
 
-
-
-
-
         val imageSlider = root.findViewById<ImageSlider>(R.id.item_image)
 
         manager = CardStackLayoutManager(context, object : CardStackListener {
@@ -78,45 +70,40 @@ class Car : Fragment() {
 
             override fun onCardSwiped(direction: Direction) {
 
-
-
+                var x = 0
                 Log.d(TAG, "onCardSwiped: p=" + manager!!.topPosition + " d=" + direction)
                 if (direction == Direction.Right) {
 
-                    viewModel._CarLiveData1.observe (
+                    viewModel._CarLiveData1.observe(
                         viewLifecycleOwner,
-                        Observer<MutableList<tn.esprit.miniprojet.Models.Car>>  {
+                        Observer<MutableList<tn.esprit.miniprojet.Models.Car>> {
+                            /* for(i in it){
+                                 var user2= i.user.toString()
 
-                            if (it.size > 0) {
+                                 addContact(user2!!)
 
+                             }*/
+                            addContact(it[0].user!!.toString())
+                            it.removeAt(0)
 
+                            var w = it.size
 
-
-
-
-
-                                for(i in it ){
-                                   var iduser2 =  i.user.toString()
-
-                                    Log.i("id l karhba ",iduser2)
-                                    if(iduser2.equals("63add2a41967477f6813648f"))
-                                    addContact(iduser2)
-                                }
-
-                            }
                         })
 
 
 
                     Toast.makeText(context, "Direction Right", Toast.LENGTH_SHORT).show()
-                }
-                if (direction == Direction.Top) {
+                } else if (direction == Direction.Top) {
+
                     Toast.makeText(context, "Direction Top", Toast.LENGTH_SHORT).show()
-                }
-                if (direction == Direction.Left) {
+                } else if (direction == Direction.Left) {
+                    viewModel._CarLiveData1.value!!.removeAt(0)
+
+
                     Toast.makeText(context, "Direction Left", Toast.LENGTH_SHORT).show()
-                }
-                if (direction == Direction.Bottom) {
+                } else if (direction == Direction.Bottom) {
+
+
                     Toast.makeText(context, "Direction Bottom", Toast.LENGTH_SHORT).show()
                 }
 
@@ -135,13 +122,13 @@ class Car : Fragment() {
             }
 
             override fun onCardAppeared(view: View, position: Int) {
-                val tv = view.findViewById<TextView>(R.id.item_name)
-                Log.d(TAG, "onCardAppeared: " + position + ", nama: " + tv.text)
+                val tv = view.findViewById<TextView>(R.id.idmetkhobi)
+                Log.d(TAG, "onCardAppeared: " + position + ", id aman: " + tv.text)
             }
 
             override fun onCardDisappeared(view: View, position: Int) {
-                val tv = view.findViewById<TextView>(R.id.item_name)
-                Log.d(TAG, "onCardAppeared: " + position + ", nama: " + tv.text)
+                val tv = view.findViewById<TextView>(R.id.idmetkhobi)
+                Log.d(TAG, "onCardAppeared: " + position + ", id: " + tv.text)
             }
         })
         manager!!.setStackFrom(StackFrom.None)
@@ -181,7 +168,7 @@ class Car : Fragment() {
             Observer<MutableList<tn.esprit.miniprojet.Models.Car>> {
 
                 if (it.size > 0) {
-                    for(i in it ){
+                    for (i in it) {
                         i.user
                     }
                     items = it
@@ -194,19 +181,19 @@ class Car : Fragment() {
 
 
     }
-    private fun addContact(iduser2 : String){
 
-        viewModelContact= ViewModelProvider(this).get(ContactViewModel::class.java)
-        viewModelContact.AddContact(iduser2,requireContext())
-        viewModelContact._ContactLiveData .observe(this, Observer<Contact>{
-            if (it!=null){
-                Toast.makeText(requireContext(),  "like sended", Toast.LENGTH_LONG).show()
+    private fun addContact(iduser2: String) {
 
-            }else{
-                Toast.makeText(requireContext(),  "", Toast.LENGTH_LONG).show()
+        viewModelContact = ViewModelProvider(this).get(ContactViewModel::class.java)
+        viewModelContact.AddContact(iduser2, requireContext())
+        viewModelContact._ContactLiveData.observe(this, Observer<Contact> {
+            if (it != null) {
+                Toast.makeText(requireContext(), "like sended", Toast.LENGTH_LONG).show()
+
+            } else {
+                Toast.makeText(requireContext(), "", Toast.LENGTH_LONG).show()
             }
         })
-
 
 
     }
@@ -214,8 +201,6 @@ class Car : Fragment() {
     companion object {
         private val TAG = Car::class.java.simpleName
     }
-
-
 
 
 }

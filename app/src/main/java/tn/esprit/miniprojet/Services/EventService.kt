@@ -3,22 +3,34 @@ package tn.esprit.miniprojet.Services
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
-import retrofit2.http.Path
+import retrofit2.http.*
 import tn.esprit.miniprojet.Models.Car
 import tn.esprit.miniprojet.Models.Event
+import tn.esprit.miniprojet.Models.Post
+import tn.esprit.miniprojet.Models.User
 
 interface EventService {
 
 
 
-    @Multipart
-    @POST("event/{iduser}")
+
+    @POST("event")
     fun JoinEvent(
-        @Part("EventName") EventName: String,
-        @Part("EventDescription") EventDescription: String,
-        @Path("iduser") idUser : String,
+        @Body event : Event
     ): Call<Event>
+
+    @GET("event/{iduser}")
+    fun geteventbyid(
+        @Path ("iduser") iduser :String
+    ):Call<MutableList<Event>>
+
+    @DELETE("event/{idEvent}")
+    fun deleteEventbyid(
+        @Path ("idEvent") idEvent :String
+    ):Call<String>
+
+
+
+
+
 }

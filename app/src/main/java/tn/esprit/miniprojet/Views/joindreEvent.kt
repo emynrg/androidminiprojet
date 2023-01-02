@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -26,6 +27,7 @@ class joindreEvent : AppCompatActivity() {
     lateinit var description : TextView
     lateinit var name : TextView
     lateinit var Join : Button
+    lateinit var imageEvent : ImageView
 
 
     private lateinit var eventViewModel : EventViewModel
@@ -37,16 +39,37 @@ class joindreEvent : AppCompatActivity() {
         Join = findViewById(R.id.joineventButton)
         description = findViewById(R.id.descriptiondetailsTF)
         name = findViewById(R.id.namedetailsTF)
+        imageEvent = findViewById(R.id.imageViewEventdetails)
 
        val  desc = intent.getStringExtra("description")
        val  namee = intent.getStringExtra("name")
 
+        val desc2 = intent.getStringExtra("descriptionaffichageprofile")
+
+
+
 
         description.text=desc
         name.text=namee
+
+        if(name.text.toString().equals("Event: DRIFT Thursday 1st December")){
+            imageEvent.setImageResource(R.drawable.event1)
+
+        }else if(name.text.toString().equals("Event: DRIFT Thursday 2nd December")){
+            imageEvent.setImageResource(R.drawable.event2)
+
+        }else if(name.text.toString().equals("Event: DRIFT Thursday 3rd December")) {
+            imageEvent.setImageResource(R.drawable.event3)
+        }else if(name.text.toString().equals("Event: DRIFT Thursday 4th December")) {
+            imageEvent.setImageResource(R.drawable.event4)
+        }
+
+
+
+
         Join.setOnClickListener {
 
-            JoinEvent(applicationContext.getSharedPreferences(PREF_LOGIN,AppCompatActivity.MODE_PRIVATE).getString(ID,"")!!)
+            JoinEvent(desc2.toString())
         }
 
 
@@ -57,12 +80,13 @@ class joindreEvent : AppCompatActivity() {
     }
 
 
-    fun JoinEvent(idUser :String){
-        val nameee="testet".toString().trim()
-        val descriptionEvent="ajejahjheajhjae".toString().trim()
-        Log.i("jaekajajaieaejaajae",name.text.toString())
+    fun JoinEvent(x : String){
+        val nameee=name.text.toString().trim()
+        val descriptionEvent=description.text.toString().trim()
+        val event = Event("",nameee,x,applicationContext.getSharedPreferences(PREF_LOGIN,AppCompatActivity.MODE_PRIVATE).getString(ID,"")!!,0)
+
         eventViewModel= ViewModelProvider(this).get(EventViewModel::class.java)
-        eventViewModel.joinEvent(nameee,descriptionEvent,idUser)
+        eventViewModel.joinEvent(event)
         eventViewModel._EventLiveData .observe(this, Observer<Event>{
             if (it!=null){
                 Toast.makeText(applicationContext,  "Joined", Toast.LENGTH_LONG).show()
