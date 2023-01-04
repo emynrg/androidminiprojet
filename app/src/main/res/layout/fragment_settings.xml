@@ -24,20 +24,11 @@
             android:layout_height="wrap_content"
             android:text="Mohamed amine REGAIA"
             android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/profile_image"
             app:layout_constraintTop_toBottomOf="@+id/profile_image"
             app:layout_constraintVertical_bias="0.136" />
-
-        <ImageView
-            android:layout_width="27dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="4dp"
-            android:src="@drawable/menu"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.958"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="344dp"
@@ -76,8 +67,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
 
-            android:textColor="@color/white"
             android:text="Events"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -89,11 +80,11 @@
             android:id="@+id/nombredevent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/white"
-
-
             android:layout_marginTop="4dp"
+
+
             android:text="0"
+            android:textColor="@color/white"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -103,9 +94,9 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-android:textColor="@color/white"
             android:layout_marginTop="4dp"
             android:text="10"
+            android:textColor="@color/white"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.89"
@@ -113,12 +104,12 @@ android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/nombrematch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-android:textColor="@color/white"
             android:layout_marginTop="4dp"
-            android:text="274"
+            android:text="0"
+            android:textColor="@color/white"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.69"
@@ -131,8 +122,8 @@ android:textColor="@color/white"
             android:layout_height="wrap_content"
             android:gravity="center"
 
-                 android:textColor="@color/white"
-            android:text="Suivis"
+            android:text="Matchs"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.724"
@@ -145,10 +136,10 @@ android:textColor="@color/white"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/white"
-
-
             android:text="Likes"
+
+
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.953"
@@ -172,6 +163,16 @@ android:textColor="@color/white"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.186" />
 
+        <ImageView
+            android:id="@+id/logoutButton"
+            android:layout_width="82dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/logout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -187,7 +188,7 @@ android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="your events"
+            android:text="Your events"
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -198,40 +199,41 @@ android:textColor="@color/white"
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleVieweventProfile"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="120dp"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
-        app:layout_constraintVertical_bias="0.0" />
-
-
-
-
-
-
-
-
+        app:layout_constraintVertical_bias="0.07" />
 
     <TextView
-        android:id="@+id/text123"
-        android:layout_width="match_parent"
-        android:layout_height="320dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
-        android:text="aaaaaaaaaaaaaaaaaaaaaaa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your matchs"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/recycleViewmatch"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="invisible"
-        app:layout_constraintHorizontal_bias="0.164"
+        app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/recycleVieweventProfile"
+        app:layout_constraintVertical_bias="0.458" />
 
-
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleViewmatch"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recycleVieweventProfile"
+        app:layout_constraintVertical_bias="0.605" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout5"
@@ -244,18 +246,6 @@ android:textColor="@color/white"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
-
-        <ImageView
-            android:id="@+id/logoutButton"
-            android:layout_width="82dp"
-            android:layout_height="44dp"
-            android:src="@drawable/logout"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -75,6 +75,7 @@ class Home : AppCompatActivity() {
     private lateinit var bitmap : Bitmap
 
 
+
     lateinit var navController: NavController
     lateinit var add : ImageView
     lateinit var carimage : ImageView
@@ -180,7 +181,6 @@ class Home : AppCompatActivity() {
 
         saveCar.setOnClickListener{
             AddCar(applicationContext.getSharedPreferences(PREF_LOGIN,AppCompatActivity.MODE_PRIVATE).getString(ID,"")!!)
-
 
         }
 

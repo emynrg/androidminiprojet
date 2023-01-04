@@ -29,13 +29,9 @@ class CardStackAdapter(val context: Context) : RecyclerView.Adapter<CardStackAda
         holder.nama.setText(car.marque)
         holder.usia.setText(car.model)
         holder.kota.setText(car.description)
-        holder.id.setText(car.user)
 
 
-        holder.itemView.setOnClickListener{
-            var x = car.user
-            Log.i("user id ",x.toString())
-        }
+
 
 
 
@@ -68,7 +64,7 @@ class CardStackAdapter(val context: Context) : RecyclerView.Adapter<CardStackAda
         var nama: TextView //marque
         var usia: TextView // model
         var kota: TextView //description
-        var id: TextView //description
+
 
         /* fun setData(data: ItemModel) {
              Picasso.get()
@@ -86,7 +82,7 @@ class CardStackAdapter(val context: Context) : RecyclerView.Adapter<CardStackAda
             nama = itemView.findViewById(R.id.item_name)
             usia = itemView.findViewById(R.id.item_age)
             kota = itemView.findViewById(R.id.item_city)
-            id=itemView.findViewById(R.id.idmetkhobi)
+
         }
     }
     fun setItems(items: List<Car>) {

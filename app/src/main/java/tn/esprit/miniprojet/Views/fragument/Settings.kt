@@ -24,13 +24,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButtonToggleGroup
-import tn.esprit.miniprojet.Models.Event
-import tn.esprit.miniprojet.Models.Post
-import tn.esprit.miniprojet.Models.ResponseUser
-import tn.esprit.miniprojet.Models.User
+import tn.esprit.miniprojet.Models.*
 import tn.esprit.miniprojet.R
 import tn.esprit.miniprojet.ViewModel.Adapter.EventAdapteraffichageProfile
 import tn.esprit.miniprojet.ViewModel.Adapter.PostAdapter
+import tn.esprit.miniprojet.ViewModel.Adapter.contactAffichageAdapter
+import tn.esprit.miniprojet.ViewModel.ContactViewModel
 import tn.esprit.miniprojet.ViewModel.EventViewModel
 import tn.esprit.miniprojet.ViewModel.LoginViewModel
 import tn.esprit.miniprojet.ViewModel.listPostViewModel
@@ -45,13 +44,22 @@ class Settings : Fragment() {
     lateinit var usernameaffichage : TextView
     lateinit var buttonmodifier: TextView
     lateinit var nombredevent: TextView
+    lateinit var nombrmatchs: TextView
+
 
 
     lateinit var rvEvent: RecyclerView;
     lateinit var listevent:MutableList<Event>
     lateinit var viewModelevent: EventViewModel
-    lateinit var eventbutton : Button
-    lateinit var matchbutton : Button
+
+
+
+    lateinit var viewModelcontact: ContactViewModel
+    lateinit var listconatctaffichage:MutableList<Contactaffichage>
+    lateinit var rvcontact : RecyclerView
+
+
+
 
 
 
@@ -73,33 +81,25 @@ class Settings : Fragment() {
         logout = v.findViewById(R.id.logoutButton)
         usernameaffichage =v.findViewById(R.id.UsernameAffichage)
         nombredevent=v.findViewById(R.id.nombredevent)
+        nombrmatchs=v.findViewById(R.id.nombrematch)
 
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
 
         viewModelevent= ViewModelProvider(this).get(EventViewModel::class.java)
+        viewModelcontact= ViewModelProvider(this).get(ContactViewModel::class.java)
         rvEvent=v.findViewById(R.id.recycleVieweventProfile)
+        rvcontact=v.findViewById(R.id.recycleViewmatch)
         listevent= ArrayList()
+        listconatctaffichage= ArrayList()
 
         buttonmodifier = v.findViewById(R.id.modifierprofile)
-        val text = v.findViewById<TextView>(R.id.text123)
-
-        eventbutton = v.findViewById(R.id.button_event)
-        matchbutton  = v.findViewById(R.id.button_match)
 
 
 
 
-        eventbutton.setOnClickListener {
-
-Toast.makeText(context,"event",Toast.LENGTH_SHORT).show()
-
-        }
 
 
-        matchbutton.setOnClickListener {
-            text.isVisible
-        }
 
 
 
@@ -109,7 +109,7 @@ Toast.makeText(context,"event",Toast.LENGTH_SHORT).show()
         getEventbyID(requireContext().getSharedPreferences(PREF_LOGIN,AppCompatActivity.MODE_PRIVATE).getString(ID,"")!!)
 
 
-
+        getMatch()
 
 
 
@@ -166,6 +166,35 @@ Toast.makeText(context,"event",Toast.LENGTH_SHORT).show()
             }else{
             }
         })
+    }
+
+
+
+    private fun getMatch(){
+
+        viewModelcontact.affichagecontact(requireContext())
+        viewModelcontact._ContactaffichageLiveData.observe(viewLifecycleOwner,Observer<MutableList<Contactaffichage>>{
+            if(it!=null){
+                listconatctaffichage = it
+                nombrmatchs.setText(it.size.toString())
+
+                val layoutManagerServices= LinearLayoutManager(requireContext())
+                layoutManagerServices.setOrientation(LinearLayoutManager.VERTICAL);
+                rvcontact.layoutManager = layoutManagerServices
+                val eventAdapter1 = contactAffichageAdapter(requireContext(),listconatctaffichage)
+                Log.i("la liste des matchs",it.toString())
+                rvcontact.adapter = eventAdapter1
+                eventAdapter1.notifyItemChanged(listconatctaffichage.size+1)
+            }else{
+                Toast.makeText(context, "no match", Toast.LENGTH_SHORT).show()
+
+            }
+
+
+
+        })
+
+
     }
 
 

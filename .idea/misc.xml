@@ -14,6 +14,7 @@
         <entry key="..\:/android/miniprojet/app/src/main/res/drawable/addpost.xml" value="0.27" />
         <entry key="..\:/android/miniprojet/app/src/main/res/drawable/car.xml" value="0.312" />
         <entry key="..\:/android/miniprojet/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.27" />
+        <entry key="..\:/android/miniprojet/app/src/main/res/drawable/logout.xml" value="0.27" />
         <entry key="..\:/android/miniprojet/app/src/main/res/drawable/profile.xml" value="0.312" />
         <entry key="..\:/android/miniprojet/app/src/main/res/drawable/shadow.xml" value="0.1925" />
         <entry key="..\:/android/miniprojet/app/src/main/res/drawable/shadow1.xml" value="0.3625" />
@@ -24,9 +25,9 @@
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/activity_main.xml" value="0.20618556701030927" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/activity_modifyprofile.xml" value="0.33" />
-        <entry key="..\:/android/miniprojet/app/src/main/res/layout/activity_signup.xml" value="0.22" />
+        <entry key="..\:/android/miniprojet/app/src/main/res/layout/activity_signup.xml" value="0.33" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/activity_welcome_page.xml" value="0.3625" />
-        <entry key="..\:/android/miniprojet/app/src/main/res/layout/addcar.xml" value="0.18" />
+        <entry key="..\:/android/miniprojet/app/src/main/res/layout/addcar.xml" value="0.33" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/event.xml" value="0.25" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/fragment_car.xml" value="0.3625" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/fragment_home.xml" value="0.33" />
@@ -36,8 +37,10 @@
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/item_event.xml" value="0.3625" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/item_page.xml" value="0.3614583333333333" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/item_post.xml" value="0.33" />
+        <entry key="..\:/android/miniprojet/app/src/main/res/layout/itemmatch.xml" value="0.3614583333333333" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/post.xml" value="0.3614583333333333" />
         <entry key="..\:/android/miniprojet/app/src/main/res/layout/test.xml" value="0.3605072463768116" />
+        <entry key="..\:/android/miniprojet/app/src/main/res/layout/yourevent.xml" value="0.3625" />
         <entry key="..\:/android/miniprojet/app/src/main/res/menu/bottom_nav.xml" value="0.3625" />
         <entry key="..\:/android/miniprojet/app/src/main/res/menu/nav_menu.xml" value="0.33" />
         <entry key="..\:/android/miniprojet/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1205" />

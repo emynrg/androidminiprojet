@@ -12,6 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import tn.esprit.miniprojet.Models.Car
 import tn.esprit.miniprojet.Models.Contact
+import tn.esprit.miniprojet.Models.Contactaffichage
 import tn.esprit.miniprojet.Retrofit.ApiClient
 import tn.esprit.miniprojet.Services.CarService
 import tn.esprit.miniprojet.Services.ContactService
@@ -19,6 +20,13 @@ import tn.esprit.miniprojet.Services.ContactService
 class ContactViewModel  : ViewModel() {
     var ContactLiveData: MutableLiveData<Contact> = MutableLiveData()
     val _ContactLiveData : LiveData<Contact> = ContactLiveData
+
+
+    var ContactaffichageLiveData: MutableLiveData<MutableList<Contactaffichage>> = MutableLiveData()
+    val _ContactaffichageLiveData : LiveData<MutableList<Contactaffichage>> = ContactaffichageLiveData
+
+
+
 
     fun AddContact(user2 : String, context : Context){
         val retrofit= ApiClient.getApiClientWithToken(context)!!.create(ContactService::class.java)
@@ -44,6 +52,37 @@ class ContactViewModel  : ViewModel() {
     }
 
 
+
+fun affichagecontact(context: Context){
+
+
+
+    val retrofit= ApiClient.getApiClientWithToken(context)!!.create(ContactService::class.java)
+    val addCar=retrofit.affichageContact()
+    addCar.enqueue(object : Callback<MutableList<Contactaffichage>> {
+        override fun onResponse(call: Call<MutableList<Contactaffichage>>, response: Response<MutableList<Contactaffichage>>) {
+            if (response.isSuccessful){
+                ContactaffichageLiveData.postValue(response.body())
+            }else{
+                Log.i("errorBody",  response.errorBody()!!.string())
+
+                ContactaffichageLiveData.postValue(response.body())
+            }
+
+        }
+
+        override fun onFailure(call: Call<MutableList<Contactaffichage>>, t: Throwable) {
+            ContactaffichageLiveData.postValue(null)
+            Log.i("failure",  t.message.toString())
+        }
+
+    })
+
+
+
+
+
+}
 
 
 

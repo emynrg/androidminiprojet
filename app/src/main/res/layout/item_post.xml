@@ -59,8 +59,12 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="4dp"
             android:text="description"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/img_post"
-            app:layout_constraintTop_toBottomOf="@+id/tv_titre" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_titre"
+            app:layout_constraintVertical_bias="0.106" />
 
         <ImageView
             android:id="@+id/img_post"
@@ -72,6 +76,19 @@
             android:src="@drawable/bmw"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/postOmwner" />
+
+
+        <ImageView
+            android:id="@+id/likeimage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="4dp"
+
+            android:src="@drawable/notlike"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.916"
+            app:layout_constraintStart_toEndOf="@+id/img_post" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

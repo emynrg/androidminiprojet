@@ -23,7 +23,7 @@ class EventAdapteraffichageProfile(val context : Context , private val listEvent
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_event , parent,false)
-        return EventViewHolder(view)
+            return EventViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {

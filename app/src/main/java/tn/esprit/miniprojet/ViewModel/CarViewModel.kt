@@ -45,8 +45,8 @@ class CarViewModel : ViewModel() {
     }
 
 
-    fun getCar() {
-        val retrofit = ApiClient.getApiClient()!!.create(CarService::class.java)
+    fun getCar(context: Context) {
+        val retrofit = ApiClient.getApiClientWithToken(context )!!.create(CarService::class.java)
         val getCar = retrofit.getcar()
         getCar.enqueue(object : Callback<MutableList<Car>> {
             override fun onResponse(call: Call<MutableList<Car>>, response: Response<MutableList<Car>>) {

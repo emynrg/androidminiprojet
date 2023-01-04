@@ -1,27 +1,33 @@
 package tn.esprit.miniprojet.Views
 
+import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import tn.esprit.miniprojet.Models.User
 import tn.esprit.miniprojet.R
 import tn.esprit.miniprojet.ViewModel.SignUpViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class signupActivity : AppCompatActivity() {
 
     lateinit var username : EditText
     lateinit var email : EditText
-    lateinit var datedenaissance : EditText
+    lateinit var datedenaissance : TextView
     lateinit var numero : EditText
     lateinit var password : EditText
     lateinit var inscri : Button
     lateinit var signUpViewModel: SignUpViewModel
-
+    lateinit var pickdate : Button
+    val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
 
 
 
@@ -35,6 +41,7 @@ class signupActivity : AppCompatActivity() {
         numero = findViewById(R.id.numero)
         password = findViewById(R.id.password)
         inscri = findViewById(R.id.button)
+        pickdate = findViewById(R.id.pickdate)
 
 
 
@@ -43,12 +50,29 @@ class signupActivity : AppCompatActivity() {
             if (validationFullname()&& validationEmail()&&validationPhoneNumber()&&validationPassword()){
                 SignUp()
 
+
             }
 
         }
+        val myCalendar = Calendar.getInstance()
+
+        val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            myCalendar.set(Calendar.YEAR, year)
+            myCalendar.set(Calendar.MONTH, month)
+            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            updateLabel(myCalendar)
+
+        }
+        pickdate.setOnClickListener {
+            DatePickerDialog(this,datePicker,myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show()
+        }
 
     }
+    private fun updateLabel(myCalendar: Calendar) {
+        datedenaissance.setText(sdf.format(myCalendar.time))
 
+    }
 
 
     fun validationFullname(): Boolean {
@@ -100,6 +124,8 @@ class signupActivity : AppCompatActivity() {
 
         signUpViewModel= ViewModelProvider(this).get(SignUpViewModel::class.java)
         signUpViewModel.signUp(user)
+        startActivity(Intent(this,LoginActivity::class.java) )
+
         signUpViewModel._signUpLiveData.observe(this, Observer<User>{
             if (it!=null){
                 Toast.makeText(applicationContext, "Welcome !", Toast.LENGTH_LONG).show()

@@ -77,16 +77,11 @@ class Car : Fragment() {
                     viewModel._CarLiveData1.observe(
                         viewLifecycleOwner,
                         Observer<MutableList<tn.esprit.miniprojet.Models.Car>> {
-                            /* for(i in it){
-                                 var user2= i.user.toString()
 
-                                 addContact(user2!!)
-
-                             }*/
                             addContact(it[0].user!!.toString())
                             it.removeAt(0)
 
-                            var w = it.size
+
 
                         })
 
@@ -94,6 +89,16 @@ class Car : Fragment() {
 
                     Toast.makeText(context, "Direction Right", Toast.LENGTH_SHORT).show()
                 } else if (direction == Direction.Top) {
+                    viewModel._CarLiveData1.observe(
+                        viewLifecycleOwner,
+                        Observer<MutableList<tn.esprit.miniprojet.Models.Car>> {
+
+                            addContact(it[0].user!!.toString())
+                            it.removeAt(0)
+
+
+
+                        })
 
                     Toast.makeText(context, "Direction Top", Toast.LENGTH_SHORT).show()
                 } else if (direction == Direction.Left) {
@@ -102,6 +107,7 @@ class Car : Fragment() {
 
                     Toast.makeText(context, "Direction Left", Toast.LENGTH_SHORT).show()
                 } else if (direction == Direction.Bottom) {
+                    viewModel._CarLiveData1.value!!.removeAt(0)
 
 
                     Toast.makeText(context, "Direction Bottom", Toast.LENGTH_SHORT).show()
@@ -122,12 +128,12 @@ class Car : Fragment() {
             }
 
             override fun onCardAppeared(view: View, position: Int) {
-                val tv = view.findViewById<TextView>(R.id.idmetkhobi)
+                val tv = view.findViewById<TextView>(R.id.item_name)
                 Log.d(TAG, "onCardAppeared: " + position + ", id aman: " + tv.text)
             }
 
             override fun onCardDisappeared(view: View, position: Int) {
-                val tv = view.findViewById<TextView>(R.id.idmetkhobi)
+                val tv = view.findViewById<TextView>(R.id.item_name)
                 Log.d(TAG, "onCardAppeared: " + position + ", id: " + tv.text)
             }
         })
@@ -161,7 +167,7 @@ class Car : Fragment() {
 
     private fun addList() {
 
-        viewModel.getCar()
+        viewModel.getCar(requireContext())
 
         viewModel._CarLiveData1.observe(
             viewLifecycleOwner,

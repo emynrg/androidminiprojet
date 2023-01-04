@@ -186,6 +186,9 @@
         app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toEndOf="@+id/tf3"
         app:layout_constraintTop_toBottomOf="@+id/modifierdatedenaissanceET" />
+    
+    
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

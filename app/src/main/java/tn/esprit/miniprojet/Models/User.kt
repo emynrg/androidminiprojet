@@ -34,8 +34,27 @@ data class ResponseUser (
 data class Userforpost(
     var _id:String?=null,
     var username: String? = null,
+
+
 )
 
+
+data class User1forContact(
+    var _id:String?=null,
+    var username: String? = null,
+    var email : String?= null,
+    var numero: String ,
+
+
+)
+data class User2forContact(
+    var _id:String?=null,
+    var username: String? = null,
+    var email : String?= null,
+    var numero: String ,
+
+
+    )
 
 
 data class loginResponse (var message: String? = null,

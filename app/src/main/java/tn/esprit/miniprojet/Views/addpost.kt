@@ -188,7 +188,9 @@ class addpost : AppCompatActivity() {
                 Toast.makeText(applicationContext,  "Post added", Toast.LENGTH_LONG).show()
 
             }else{
-                Toast.makeText(applicationContext, " no", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext,  "Post added", Toast.LENGTH_LONG).show()
+finish()
+
             }
         })
     }

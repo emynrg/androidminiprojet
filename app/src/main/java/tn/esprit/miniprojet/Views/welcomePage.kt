@@ -65,9 +65,9 @@ class welcomePage : AppCompatActivity() {
     }
     private fun postToList(){
 
-        addToList("Evenements","Des milliers d'evenement dans le monde ",R.drawable.phone)
-        addToList("Vehicules","Ajoutez des photos et des modifs a votre vehicule",R.drawable.phone)
-        addToList("Conduire","Conduisez avec des amis et voyes qui est a proximité",R.drawable.phone)
+        addToList("Events","Millions of events around TUNISIA ",R.drawable.welcome2)
+        addToList("Vehicules","Add your beast pictures",R.drawable.welcome1)
+        addToList("Forum","Like and Share your ideas in our forum",R.drawable.welcome3)
 
     }
 }
